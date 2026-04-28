@@ -43,7 +43,7 @@ import LogoSimpsons from '@/components/LogoSimpsons.vue';
         </div>
 
         <small>
-            This app was done by Fernando Cordón
+            This app was done by Laura García
         </small>
     </footer>
 </div>
