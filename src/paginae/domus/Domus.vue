@@ -1,11 +1,29 @@
 <script setup lang="ts">
 import { Button } from '@/components/ui/button'
+
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+
+import { Input } from "@/components/ui/input"
+import { ref } from 'vue';
+
+const dialogApertaEst = ref<boolean>(false)
+const quaestio = ref<string>('')
+
+
+
 </script>
 
 
 <template>
 
-<div class="bg-[rgb(21,25,52)] h-screen text-white font-sans text-center w-screen flex flex-col justify-center items-center gap-12 fixed overflow-hidden ">
+<div class="bg-[rgb(16,75,34)] h-screen text-white font-sans text-center w-screen flex flex-col justify-center items-center gap-12 fixed overflow-hidden ">
   
   <img class="absolute opacity-20 " src="/imagines/tonitrui.png" alt="">
 
@@ -21,9 +39,38 @@ import { Button } from '@/components/ui/button'
   
   <div class="z-10">
 
-        <Button class="bg-[rgb(24,182,246)] mr-2 md:py-5 md:px-6 md:text-lg hover:bg-[rgb(24,182,246,0.7)] transition-all">
-            <RouterLink to="/indecision"> Si o No </RouterLink>
-        </Button>
+      
+
+         <Dialog
+          :open="dialogApertaEst"
+          @update:open="dialogApertaEst = $event"
+         >
+
+        <DialogTrigger asChild>
+          <Button class="bg-[rgb(24,182,246)] mr-2 md:py-5 md:px-6 md:text-lg hover:bg-[rgb(24,182,246,0.7)] transition-all">
+            Si o No
+          </Button>
+        </DialogTrigger>
+        
+        <DialogContent class="sm:max-w-[425px] bg-[rgb(21,25,52)] text-white border-[rgb(24,182,246)]">
+          <DialogHeader>
+            <DialogTitle class="text-white">Pregúntame</DialogTitle>
+            <DialogDescription class="text-gray-300">
+              No sigas con tus dudas, yo te responderé SÍ o NO
+            </DialogDescription>
+          </DialogHeader>
+
+          
+          <div class="mt-4">
+            <Input
+              class="bg-[rgb(31,35,62)] text-white placeholder:text-gray-400 border-[rgb(24,182,246)]"
+              placeholder="Escribe tu pregunta aquí... "
+              v-model="quaestio"
+              />
+          </div>
+           
+        </DialogContent>
+    </Dialog>
 
         <Button class="bg-[rgb(24,182,246)] mr-2 md:py-5 md:px-6 md:text-lg hover:bg-[rgb(24,182,246,0.7)] transition-all">
             <RouterLink to="/batman"> Batman </RouterLink>
