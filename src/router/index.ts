@@ -8,6 +8,13 @@ import Circa from "@/paginae/simpsons/Circa.vue";
 import Collectione from "@/paginae/simpsons/Collectione.vue";
 import Character from "@/paginae/simpsons/Character.vue";
 
+import GhibliPrimus from "../paginae/ghibli/Primus.vue";
+import GhibliLayout from "@/paginae/ghibli/Layout.vue";
+import GhibliCirca from "@/paginae/ghibli/Circa.vue";
+import GhibliCollectione from "@/paginae/ghibli/Collectione.vue";
+import GhibliCharacter from "@/paginae/ghibli/Character.vue";
+
+
 export const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
@@ -62,6 +69,43 @@ export const router = createRouter({
       path: '/indecision',
       name: 'indecision',
       component: Responsum
+    },
+    {
+      path: '/ghibli',
+      children: [
+        {
+          path: '',
+          name: 'ghibli',
+          component: GhibliPrimus
+        },
+        {
+          path: 'about',
+          component: GhibliLayout,
+          children: [
+            {
+              path: '',
+              name: 'ghibli-about',
+              component: GhibliCirca
+            }
+          ]
+        },
+        {
+          path: 'gallery',
+          component: GhibliLayout,
+          children: [
+            {
+              path: '',
+              name: 'ghibli-characters',
+              component: GhibliCollectione
+            },
+            {
+              path: ':id',
+              name: 'ghibli-detail',
+              component: GhibliCharacter
+            }
+          ]
+        }
+      ]
     },
     {
       path: '/:pathMatch(.*)',

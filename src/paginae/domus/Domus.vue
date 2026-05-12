@@ -38,9 +38,6 @@ const quaestio = ref<string>('')
     </p>
   
   <div class="z-10">
-
-      
-
          <Dialog
           :open="dialogApertaEst"
           @update:open="dialogApertaEst = $event"
@@ -84,7 +81,13 @@ const quaestio = ref<string>('')
             <a href="https://www.upv.es"> UPV </a>
         </Button>
 
+        <Button class="bg-[rgb(246,24,117)] w-80 mr-2 md:py-5 md:px-6 md:text-lg hover:bg-[rgb(246,24,117,0.7)] transition-all">
+            <RouterLink to="/ghibli"> PROYECTO </RouterLink>
+        </Button>
+
     </div>
+
+    
 
 </div>
   
