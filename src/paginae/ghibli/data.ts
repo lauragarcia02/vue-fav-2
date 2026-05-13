@@ -1,4 +1,4 @@
-export interface Character {
+export interface Film {
   id: number;
   title: string;
   original_title: string;
@@ -10,7 +10,7 @@ export interface Character {
   running_time: string;
 }
 
-export const characters: Character[] = [
+export const films: Film[] = [
   {
       "id": 0,
       "title": "Castle in the Sky",

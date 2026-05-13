@@ -8,11 +8,11 @@ import Circa from "@/paginae/simpsons/Circa.vue";
 import Collectione from "@/paginae/simpsons/Collectione.vue";
 import Character from "@/paginae/simpsons/Character.vue";
 
-import GhibliPrimus from "../paginae/ghibli/Primus.vue";
+import GhibliHome from "../paginae/ghibli/Home.vue";
 import GhibliLayout from "@/paginae/ghibli/Layout.vue";
-import GhibliCirca from "@/paginae/ghibli/Circa.vue";
-import GhibliCollectione from "@/paginae/ghibli/Collectione.vue";
-import GhibliCharacter from "@/paginae/ghibli/Character.vue";
+import GhibliAbout from "@/paginae/ghibli/About.vue";
+import GhibliCollection from "@/paginae/ghibli/Collection.vue";
+import GhibliFilm from "@/paginae/ghibli/Film.vue";
 
 
 export const router = createRouter({
@@ -76,7 +76,7 @@ export const router = createRouter({
         {
           path: '',
           name: 'ghibli',
-          component: GhibliPrimus
+          component: GhibliHome
         },
         {
           path: 'about',
@@ -85,7 +85,7 @@ export const router = createRouter({
             {
               path: '',
               name: 'ghibli-about',
-              component: GhibliCirca
+              component: GhibliAbout
             }
           ]
         },
@@ -96,12 +96,12 @@ export const router = createRouter({
             {
               path: '',
               name: 'ghibli-characters',
-              component: GhibliCollectione
+              component: GhibliCollection
             },
             {
               path: ':id',
               name: 'ghibli-detail',
-              component: GhibliCharacter
+              component: GhibliFilm
             }
           ]
         }

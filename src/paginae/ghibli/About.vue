@@ -13,7 +13,7 @@
       <img
         class="object-contain h-full w-auto transition-all duration-300"
         src="/imagines/ghibli/totoro.png"
-        alt="Ghibli character"
+        alt="Ghibli Totoro"
       />
 
     </figure>

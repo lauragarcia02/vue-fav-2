@@ -3,7 +3,7 @@
 import { Card } from '@/components/ui/card'
 import CardContent from '@/components/ui/card/CardContent.vue'
 
-import { characters } from './data'
+import { films } from './data'
 
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -14,13 +14,13 @@ const inPagina = 3
 const nuncPagina = ref(1)
 
 const totalPaginae = computed(() =>
-  Math.ceil(characters.length / inPagina)
+  Math.ceil(films.length / inPagina)
 )
 
 const listaGhibli = computed(() => {
   const inicio = (nuncPagina.value - 1) * inPagina
   const fin = inicio + inPagina
-  return characters.slice(inicio, fin)
+  return films.slice(inicio, fin)
 })
 
 const ireAdPaginam = (pagina: number) => {
@@ -54,29 +54,29 @@ const paginaMumeri = computed(() =>
   <div class="flex gap-8 px-2">
 
     <Card
-      v-for="character in listaGhibli"
-      :key="character.id"
+      v-for="film in listaGhibli"
+      :key="film.id"
       class="cursor-pointer w-75 h-105 hover:bg-[#ffdff9] transition-all"
     >
 
       <CardContent
         class="flex flex-col items-center text-center justify-center gap-1 w-full"
-        @click="router.push(`/ghibli/gallery/${character.id}`)"
+        @click="router.push(`/ghibli/gallery/${film.id}`)"
       >
 
         <img
-          :src="`/imagines/ghibli/${character.image}`"
-          :alt="character.title"
+          :src="`/imagines/ghibli/${film.image}`"
+          :alt="film.title"
           class="w-60 h-80 object-cover object-center rounded-md"
         />
 
         <div class="flex flex-col items-center text-center mt-1">
             <h2 class="font-medium text-lg ">
-             {{ character.title }}
+             {{ film.title }}
             </h2>
 
             <p>
-            {{ character.release_date }}
+            {{ film.release_date }}
             </p>
         </div>
 

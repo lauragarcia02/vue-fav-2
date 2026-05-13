@@ -2,7 +2,7 @@
 
 import { computed, ref, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { characters, type Character } from './data'
+import { films, type Film } from './data'
 
 import { CheckIcon, ChevronsUpDownIcon } from 'lucide-vue-next'
 
@@ -28,13 +28,13 @@ import {
 const route = useRoute()
 const router = useRouter()
 
-const character = ref<Character | undefined>(
-  characters.find(char => char.id === Number(route.params.id))
+const film = ref<Film | undefined>(
+  films.find(film => film.id === Number(route.params.id))
 )
 
-const ghibliCharacters = characters.map(char => ({
-  value: char.id.toString(),
-  label: char.title
+const ghibliFilms = films.map(film => ({
+  value: film.id.toString(),
+  label: film.title
 }))
 
 const open = ref(false)
@@ -43,31 +43,31 @@ const value = ref(route.params.id?.toString() || '')
 
 watch(() => route.params.id, (newId) => {
 
-  character.value = characters.find(
-    char => char.id === Number(newId)
+  film.value = films.find(
+    film => film.id === Number(newId)
   )
 
   value.value = newId?.toString() || ''
 })
 
-const selectCharacter = (characterId: string) => {
+const selectFilm = (filmId: string) => {
 
-  value.value = characterId
+  value.value = filmId
 
   open.value = false
 
-  router.push(`/ghibli/gallery/${characterId}`)
+  router.push(`/ghibli/gallery/${filmId}`)
 }
 
 const selectedLabel = computed(() => {
 
   if (!value.value) {
-    return 'Select a character...'
+    return 'Select a film...'
   }
 
-  return ghibliCharacters.find(
-    character => character.value === value.value
-  )?.label || 'Select a character...'
+  return ghibliFilms.find(
+    film => film.value === value.value
+  )?.label || 'Select a film...'
 })
 
 </script>
@@ -75,15 +75,14 @@ const selectedLabel = computed(() => {
 <template>
 
 <div
-  v-if="character"
+  v-if="film"
   class="w-full max-w-350 md:mx-auto my-8 px-5 md:px-20"
 >
 
   <div class="mb-8 flex flex-row gap-3 items-center justify-end">
 
-    
-    <label class="block text-lg font-semibold mb-2 text-gray-800">
-      Search character:
+    <label class="block text-lg font-semibold text-gray-800">
+      Search film:
     </label>
 
     <Popover v-model:open="open">
@@ -115,16 +114,16 @@ const selectedLabel = computed(() => {
           <CommandList>
 
             <CommandEmpty>
-              Character not found.
+              Film not found.
             </CommandEmpty>
 
             <CommandGroup>
 
               <CommandItem
-                v-for="ghibli in ghibliCharacters"
+                v-for="ghibli in ghibliFilms"
                 :key="ghibli.value"
                 :value="ghibli.value"
-                @select="selectCharacter(ghibli.value)"
+                @select="selectFilm(ghibli.value)"
                 class="hover:bg-[#d16bbe] hover:text-white cursor-pointer font-medium transition-colors"
               >
 
@@ -150,9 +149,6 @@ const selectedLabel = computed(() => {
       </PopoverContent>
 
     </Popover>
-    
-
-    
 
   </div>
 
@@ -160,42 +156,57 @@ const selectedLabel = computed(() => {
     class="flex flex-col lg:flex-row items-start gap-12"
   >
 
-      <figure class=" lg:w-1/3 flex justify-center mx-auto">
-        <img
-          class="h-125 w-auto object-contain"
-          :src="`/imagines/ghibli/${character.image}`"
-          :alt="character.title"
-        />
-      </figure>
+    <figure class="lg:w-1/3 flex justify-center mx-auto">
 
-      <div class="lg:w-2/3 flex flex-col gap-6">
+      <img
+        class="h-125 w-auto object-contain"
+        :src="`/imagines/ghibli/${film.image}`"
+        :alt="film.title"
+      />
 
-        <h1 class="text-4xl font-bold leading-tight">
-          {{ character.title }} | {{ character.original_title }} 
-        </h1>
+    </figure>
 
-        <div class="flex flex-col gap-3 mt-5">
+    <div class="lg:w-2/3 flex flex-col gap-6">
 
-          <p>Release date: {{ character.release_date }}</p>
+      <h1 class="text-4xl font-bold leading-tight">
+        {{ film.title }} | {{ film.original_title }}
+      </h1>
 
-          <p>Director: {{ character.director }}</p>
+      <div class="flex flex-col gap-3 mt-5 text-lg">
 
-          <p>Producer: {{ character.producer }}</p>
+        <p>
+          <strong>Release date:</strong>
+          {{ film.release_date }}
+        </p>
 
-          <p>Running Time: {{ character.running_time }}</p>
+        <p>
+          <strong>Director:</strong>
+          {{ film.director }}
+        </p>
 
-          <p class=" mt-10">
-          {{ character.description }}
-          </p>
+        <p>
+          <strong>Producer:</strong>
+          {{ film.producer }}
+        </p>
 
-        </div>
-  
+        <p>
+          <strong>Running Time:</strong>
+          {{ film.running_time }} min
+        </p>
+
+        <p class="mt-8 leading-8 text-justify">
+          {{ film.description }}
+        </p>
+
       </div>
 
-      
+    </div>
 
   </div>
 
 </div>
 
 </template>
+
+<style scoped>
+</style>
